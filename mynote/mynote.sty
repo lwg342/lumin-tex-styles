@@ -1,0 +1,133 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mynote}[2020-10-15T113117]
+%--------Enumerate and Math
+%--------Graphs and Color
+%--------Bibliography
+%--------Tables
+%--------Hyper ref
+%--------New Command
+%--------Multiple Files
+%==================================%
+%--------Enumerate--------%
+\RequirePackage[inline, shortlabels]{enumitem}
+\setlist[itemize]{leftmargin=*}
+%--------Math--------%
+\RequirePackage{amsmath,amsthm,amssymb}
+\RequirePackage{physics}
+\RequirePackage{interval}\intervalconfig{soft open fences}
+	% ==================================
+	\newtheoremstyle{red}%
+		{3pt}% Space above
+		{}% Space below 
+		{}% Body font
+		{}%{\parindent}% Indent amount
+		{\bfseries\color{zhu}}% Theorem head font
+		{.}% Punctuation after theorem head
+		{.5em}% Space after theorem head 
+		% {\thmnumber{#2 }\thmname{\@ifempty{#3}{#1}\@ifnotempty{#3}{#3}}}
+		{\llap{\thmnumber{#2}\hspace{1em}}\thmname{\@ifempty{#3}{#1}\@ifnotempty{#3}{#3}}}
+	\newtheoremstyle{blue}%
+		{\topsep}{}{\itshape}{}{\bfseries\color{eblue}}{\newline}{0.5em}{\llap{\thmnumber{#2}\hspace{1em}}\thmname{\@ifempty{#3}{#1}\@ifnotempty{#3}{#3}}}
+	\newtheoremstyle{black}%
+		{\topsep}{}{\itshape}{}{\bfseries}{.}{0.5em}{\llap{\thmnumber{#2}\hspace{1em}}\thmname{#1}\thmnote{ (#3)}}
+	\newtheoremstyle{perl}%
+		{1em}{}{}{}{\bfseries}{\newline}{0.5em}{\llap{\thmnumber{#2}\hspace{1em}}\thmname{\@ifempty{#3}{#1}\@ifnotempty{#3}{#3}}}
+	\newtheoremstyle{compact}
+		{0em}{}{}{}{\itshape}{}{0em}{\llap{\thmnumber{#2}\hspace{1em}\thmname{\@ifempty{#3}{#1}\@ifnotempty{#3}{#3}}.\hspace{1em}}}
+	
+	% ====================================
+	\RequirePackage{thmtools}
+		% \declaretheoremstyle[
+		% 	spaceabove = 6pt,
+		% 	headfont = \itshape,
+		% 	notefont = \itshape,
+		% 	notebraces ={}{},
+		% 	headpunct = {},
+		% 	postheadspace = 0pt,
+		% 	headformat = {\llap{\NUMBER\hspace{1em}\@ifempty{\NOTE}{\NAME}{\NOTE}}}]{compact}
+		\declaretheorem[style= perl, name= Literature, parent = chapter, qed = $\blacklozenge$]{literature}
+		\declaretheorem[style=blue, name= Theorem, parent = literature]{thm}
+		\declaretheorem[style=red, name= Definition, parent = literature]{defn}
+		\declaretheorem[style=black, name= Proposition, sibling = thm]{proposition}
+		\declaretheorem[style=black, name= Lemma, parent = thm]{lemma}
+	% Perl Environment
+	% \newenvironment{perl}[1]{\begin{literature}[name = \cite{#1}, label = #1]\textit{\citetitle{#1}}\\}{\end{literature}}
+	% Some Useful Sections
+		\declaretheorem[style=compact, name= Summary, numbered = no]{summary}
+		\declaretheorem[style=compact, name= Model, numbered = no]{model}
+		\declaretheorem[style=compact, name= Result, numbered = no]{result}
+		\declaretheorem[style=compact, name= Method, numbered = no]{method}
+		\declaretheorem[style=compact, name= Data, numbered = no]{data}
+		\declaretheorem[style=compact, name= Question, numbered = no]{question}
+		\declaretheorem[style = black, name = Assumption, parent = literature]{asmp}
+	% ====================================
+	\theoremstyle{definition}
+	\theoremstyle{plain}
+		\newtheorem{corollary}{Corollary}[thm]
+	\theoremstyle{remark}
+		\newtheorem*{remark}{Remark}
+	\newenvironment{answer}{\begin{proof}[Answer]}{\end{proof}}
+%--------Graphs and Color--------%
+\RequirePackage{graphicx,subcaption,caption,xcolor}
+	\definecolor{gblue}{rgb}{0.282353, 0.521569, 0.929412}
+	\definecolor{eblue}{rgb}{0, 0.4453125, 0.734375}
+	% \definecolor{gred}{rgb}{0.858824, 0.196078, 0.211765}
+	\definecolor{gred}{rgb}{0.8, 0.2, 0.2}
+	\definecolor{violet}{rgb}{0.364706, 0.341176, 0.568627}
+	\definecolor{zhu}{rgb}{0.94902, 0.396078, 0.133333}
+	\definecolor{yellow}{rgb}{0.98039216, 0.85490196, 0.36862745}
+	\definecolor{dai}{RGB}{48, 71, 88}
+%--------Bibliography--------%
+\RequirePackage[backend=biber,style=authoryear,natbib, backref=true]{biblatex}
+%--------Hyper ref--------% 
+\RequirePackage[hidelinks]{hyperref}
+	\hypersetup{colorlinks = true, citecolor = dai, linkcolor=black, urlcolor=violet}
+% \RequirePackage{makeidx}\makeindex
+%--------Space--------%
+\RequirePackage[semibold]{libertinus}\RequirePackage[libertine,libaltvw,varbb,liby, upint]{newtxmath}
+% \RequirePackage{newtxtext}\RequirePackage[lite]{mtpro2}
+\RequirePackage[a4paper]{geometry}
+%--------New Command--------%
+	% Math
+	\newcommand{\goto}[1]{\stackrel{#1}{\to}} 
+	\newcommand{\indicator}[1]{\mathbf{1}\{#1\}}
+	\newcommand{\pr}{\mathbb{P}}
+	% Color
+	\newcommand{\blue}[1]{\textcolor{eblue}{#1}}
+	\newcommand{\red}[1]{\textcolor{gred}{#1}}
+	\newcommand{\zhu}[1]{\textcolor{zhu}{#1}}
+	\newcommand{\violet}[1]{\textcolor{violet}{#1}}
+	\newcommand{\yellow}[1]{\textcolor{yellow}{#1}}
+	\newcommand{\dai}[1]{\textcolor{dai}{#1}}
+	% For math in title
+	\newcommand{\tmath}[1]{\texorpdfstring{\(#1\)}{math}}
+	\newcommand{\tcite}[1]{\texorpdfstring{\cite{#1}}{cite-content}}
+	% Text modifier
+	\newcommand{\key}[1]{\zhu{\textit{#1}}\index{#1}}
+	\newcommand{\tags}[1]{\dai{-\textit{#1} }}
+	\newcommand{\relate}[1]{\dai{\cite{#1}}}
+	% Math Operators
+	\DeclareMathOperator{\interior}{int}
+	\DeclareMathOperator{\convexhull}{co}
+	\DeclareMathOperator{\diam}{diam}
+	\DeclareMathOperator{\diag}{diag}
+	\DeclareMathOperator{\inv}{inv}
+	\DeclareMathOperator{\vecoperator}{vec}
+	\DeclareMathOperator{\vspan}{span}
+	\DeclareMathOperator{\adjugate}{adj}
+	\DeclareMathOperator{\variance}{var}
+	\DeclareMathOperator{\covariance}{cov}
+	\DeclareMathOperator{\vech}{vech}
+	\DeclareMathOperator{\vectorise}{vec}
+	\DeclareMathOperator{\sign}{sign}
+
+	\renewcommand{\epsilon}{\varepsilon}
+	\renewcommand{\cap}{\bigcap}
+	\renewcommand{\cup}{\bigcup}
+	\renewcommand{\emptyset}{\varnothing}
+
+	\RequirePackage[parfill]{parskip}
+
+
+%--------The End--------%
+\endinput
