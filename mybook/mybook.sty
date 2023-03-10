@@ -1,25 +1,23 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{mybook}[20200414]
+\ProvidesPackage{mybook}[20230221]
 %--------Enumerate and Math
 %--------Graphs and Color
 %--------Bibliography
-%--------Tables
-%--------Hyper ref
-%--------New Command
-%--------Multiple Files
-%==================================%
+%-------Tables
+%-------Hyper ref
+%-------New Command
+%===============================%
 %--------Enumerate--------%
 \RequirePackage[inline, shortlabels]{enumitem}
 %--------Math--------%
-\RequirePackage{amsmath,amsthm,amssymb}
+\RequirePackage{amsmath,amsbsy,amsthm,amssymb}
 \RequirePackage{physics}
-	% ==================================
-	\newtheoremstyle{red}%
+\newtheoremstyle{red}%
 		{3pt}% Space above
 		{}% Space below 
 		{}% Body font
 		{}%{\parindent}% Indent amount
-		{\bfseries\color{zhu}}% Theorem head font
+		{\bfseries\color{yanzhi}}% Theorem head font
 		{.}% Punctuation after theorem head
 		{.5em}% Space after theorem head 
 		% {\thmnumber{#2 }\thmname{\@ifempty{#3}{#1}\@ifnotempty{#3}{#3}}}
@@ -28,78 +26,63 @@
 		{\topsep}{}{\itshape}{}{\bfseries\color{eblue}}{.}{0.5em}{\llap{\thmnumber{#2}\hspace{1em}}\thmname{\@ifempty{#3}{#1}\@ifnotempty{#3}{#3}}}
 	\newtheoremstyle{black}%
 		{\topsep}{}{\itshape}{}{\bfseries}{.}{0.5em}{\llap{\thmnumber{#2}\hspace{1em}}\thmname{#1}\thmnote{ (#3)}}
-	\newtheoremstyle{perl}%
-		{1em}{}{}{}{\bfseries}{\newline}{0.5em}{\llap{\thmnumber{#2}\hspace{1em}}\thmname{\@ifempty{#3}{#1}\@ifnotempty{#3}{#3}}}
 	\newtheoremstyle{compact}
-		{0em}{}{}{}{\itshape}{}{0em}{\llap{\thmnumber{#2}\hspace{1em}\thmname{\@ifempty{#3}{#1}\@ifnotempty{#3}{#3}}.\hspace{1em}}}
+		{0em}{}{}{}{\itshape}{}{0em}{\llap{\thmnumber{#2}\hspace{1em}\thmname{\@ifempty{#3}{#1}\@ifnotempty{#3}{#3}}\hspace{1em}}}
 	
 	% ====================================
 	\RequirePackage{thmtools}
-		% \declaretheoremstyle[
-		% 	spaceabove = 6pt,
-		% 	headfont = \itshape,
-		% 	notefont = \itshape,
-		% 	notebraces ={}{},
-		% 	headpunct = {},
-		% 	postheadspace = 0pt,
-		% 	headformat = {\llap{\NUMBER\hspace{1em}\@ifempty{\NOTE}{\NAME}{\NOTE}}}]{compact}
 		\declaretheorem[style=blue, name= Theorem, parent = section]{thm}
-		\declaretheorem[style=red, name= Definition, parent = section]{defn}
 		\declaretheorem[style=black, name= Proposition, sibling = thm]{proposition}
 		\declaretheorem[style=black, name= Lemma, sibling = thm]{lemma}
-	% Perl Environment
-	% \newenvironment{perl}[1]{\begin{section}[name = \cite{#1}, label = #1]\textit{\citetitle{#1}}\\}{\end{section}}
-	% Some Useful Sections
-		\declaretheorem[style=compact, name= Summary, numbered = no]{summary}
-		\declaretheorem[style=compact, name= Model, numbered = no]{model}
-		\declaretheorem[style=compact, name= Result, numbered = no]{result}
-		\declaretheorem[style=compact, name= Method, numbered = no]{method}
-		\declaretheorem[style=compact, name= Data, numbered = no]{data}
-		\declaretheorem[style=compact, name= Question, numbered = no]{question}
 		\declaretheorem[style = black, name = Assumption, parent = section]{asmp}
-	% ====================================
-	\theoremstyle{definition}
-		\newtheorem{example}{Example}[section]
-	\theoremstyle{plain}
-		\newtheorem{corollary}{Corollary}[thm]
-	\theoremstyle{remark}
-		\newtheorem*{remark}{Remark}
-	\newenvironment{answer}{\begin{proof}[Answer]}{\end{proof}}
+		\declaretheorem[style=red, name= Definition, parent = section]{defn}
+		\declaretheorem[style=compact, name= $\lozenge$, numbered = no]{note}
 %--------Graphs and Color--------%
-\RequirePackage{graphicx,subcaption,caption,xcolor}
+\RequirePackage{graphicx,subcaption,caption,color}
 	\definecolor{camblue}{rgb}{0.642, 0.757, 0.678}
 	\definecolor{gblue}{rgb}{0.282353, 0.521569, 0.929412}
-	\definecolor{eblue}{rgb}{0, 0.4453125, 0.734375}
 	\definecolor{gred}{rgb}{0.858824, 0.196078, 0.211765}
 	\definecolor{gyellow}{rgb}{0.956863, 0.760784, 0.0509804}
 	\definecolor{ggreen}{rgb}{0.235294, 0.729412, 0.329412}
 	\definecolor{violet}{rgb}{0.364706, 0.341176, 0.568627}
 	\definecolor{zhu}{rgb}{0.94902, 0.396078, 0.133333}
+	\definecolor{yanzhi}{RGB}{192, 63, 60}
+	\definecolor{qunqing}{RGB}{76, 141, 174}
 	\definecolor{seagreen}{rgb}{0, 0.412, 0.58}
 %--------Bibliography--------%
-\RequirePackage[style = authoryear]{biblatex}
+\RequirePackage[backend=biber,style=authoryear,natbib, backref=true]{biblatex}
 %--------Hyper ref--------% 
-\RequirePackage[hidelinks]{hyperref}
-	\hypersetup{colorlinks = true, citecolor = violet, linkcolor=black, urlcolor=violet}
+\RequirePackage[pdfencoding = auto, pdfusetitle]{hyperref}
+\RequirePackage{bookmark}
+	\hypersetup{colorlinks = true, citecolor = violet, linkcolor=black, urlcolor= violet}
+% \newcommand{\propautorefname}{Proposition}
+% \newcommand{\thmautorefname}{Theorem}
+% \newcommand{\lemmaautorefname}{Lemma}
+% \newcommand{\proofautorefname}{Proof}
+% \newcommand{\modelautorefname}{Model}
+% \newcommand{\mylitautorefname}{Literature}
+% \newcommand{\conjautorefname}{Conjecture}
 %--------Space--------%
 \RequirePackage{setspace}\onehalfspace
 \RequirePackage{interval}\intervalconfig{soft open fences}
-\RequirePackage[semibold]{libertinus}\RequirePackage[libertine,libaltvw,varbb,liby,smallerops]{newtxmath}
-\RequirePackage{eucal}
-% \RequirePackage{lmodern}
 \RequirePackage[a4paper]{geometry}
+\RequirePackage{eucal}
+\RequirePackage[semibold]{libertinus}
+\RequirePackage[libertine,libaltvw,varbb,liby,smallerops]{newtxmath}
 %--------New Command--------%
 	% Math
 	\newcommand{\goto}[1]{\stackrel{#1}{\to}} 
 	\newcommand{\indicator}[1]{\mathbf{1}\{#1\}}
 	\newcommand{\pr}{\mathbb{P}}
 	% Color
-	\newcommand{\blue}[1]{\textcolor{gblue}{#1}}
-	\newcommand{\red}[1]{\textcolor{gred}{#1}}
+	\newcommand{\blue}[1]{\textcolor{seagreen}{#1}}
+	\newcommand{\red}[1]{\textcolor{yanzhi}{#1}}
 	\newcommand{\yellow}[1]{\textcolor{gyellow}{#1}}
-	\newcommand{\zhu}[1]{\textcolor{zhu}{#1}}
+	\newcommand{\yanzhi}[1]{\textcolor{yanzhi}{#1}}
 	% For math in title
 	\newcommand{\tmath}[1]{\texorpdfstring{\(#1\)}{math}}
+	\newcommand{\tcite}[1]{\texorpdfstring{\citetitle{#1} by \cite{#1}}{cite-content}}
+	\newcommand{\key}[1]{\yanzhi{\textbf{#1}}\index{#1}}
 	
 	\DeclareMathOperator{\interior}{int}
 	\DeclareMathOperator{\convexhull}{co}
@@ -109,27 +92,17 @@
 	\DeclareMathOperator{\vecoperator}{vec}
 	\DeclareMathOperator{\vspan}{span}
 	\DeclareMathOperator{\adjugate}{adj}
-	\DeclareMathOperator{\variance}{var}
-	\DeclareMathOperator{\covariance}{cov}
+	\DeclareMathOperator{\Var}{Var}
+	\DeclareMathOperator{\Cov}{Cov}
 	\DeclareMathOperator{\vech}{vech}
 	\DeclareMathOperator{\vectorise}{vec}
+	\DeclareMathOperator{\sign}{sign}
+	\DeclareMathOperator{\iid}{i.i.d}
 
 	\renewcommand{\epsilon}{\varepsilon}
 	\renewcommand{\cap}{\bigcap}
 	\renewcommand{\cup}{\bigcup}
-	\renewcommand{\sqcap}{\bigsqcap}
-	\renewcommand{\sqcup}{\bigsqcup}
 	\renewcommand{\emptyset}{\varnothing}
 
-	\newcommand{\key}[1]{\zhu{\textit{#1}}\index{#1}}
-
-%--------The End--------%
-\RequirePackage{tikz}
-\usetikzlibrary{arrows, shapes}
-\tikzset{%
-            block/.style = {rectangle, draw=black, minimum width=3cm, minimum height=1cm,text centered},
-            decision/.style= {block, rounded corners, aspect = 6},
-}
-\RequirePackage{tikz-cd}
 %--------The End--------%
 \endinput

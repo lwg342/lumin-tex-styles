@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{myart}[20200414]
+\ProvidesPackage{myart}[20230228]
 %--------Enumerate and Math
 %--------Graphs and Color
 %--------Bibliography
@@ -29,8 +29,6 @@
 	\theoremstyle{remark}
 		\newtheorem*{remark}{Remark}
 		\newtheorem{result}{Result}
-\RequirePackage{thmtools}
-	\declaretheorem[style=definition,qed=$\blacklozenge$, name=Review]{review}
 %--------Graphs and Color--------%
 \RequirePackage{graphicx,subcaption,caption,color}
 	\definecolor{camblue}{rgb}{0.642, 0.757, 0.678}
@@ -40,10 +38,11 @@
 	\definecolor{ggreen}{rgb}{0.235294, 0.729412, 0.329412}
 	\definecolor{violet}{rgb}{0.364706, 0.341176, 0.568627}
 	\definecolor{zhu}{rgb}{0.94902, 0.396078, 0.133333}
+	\definecolor{yanzhi}{RGB}{192, 63, 60}
+	\definecolor{qunqing}{RGB}{76, 141, 174}
 	\definecolor{seagreen}{rgb}{0, 0.412, 0.58}
 %--------Bibliography--------%
 \RequirePackage[backend=biber,style=authoryear,natbib, backref=true]{biblatex}
-% \RequirePackage[style=authoryear,natbib]{biblatex}
 %--------Hyper ref--------% 
 \RequirePackage[pdfencoding = auto, pdfusetitle]{hyperref}
 \RequirePackage{bookmark}
@@ -55,13 +54,10 @@
 \newcommand{\modelautorefname}{Model}
 \newcommand{\mylitautorefname}{Literature}
 \newcommand{\conjautorefname}{Conjecture}
-
 %--------Space--------%
 \RequirePackage{setspace}\onehalfspacing	
 \RequirePackage{interval}\intervalconfig{soft open fences}
 \RequirePackage[a4paper]{geometry}
-% \RequirePackage{newtxtext}\RequirePackage[lite]{mtpro2}
-% \RequirePackage{lmodern}
 \RequirePackage[semibold]{libertinus}
 \RequirePackage[libertine,libaltvw,varbb,liby,smallerops]{newtxmath}
 %--------New Command--------%
@@ -70,14 +66,14 @@
 	\newcommand{\indicator}[1]{\mathbf{1}\{#1\}}
 	\newcommand{\pr}{\mathbb{P}}
 	% Color
-	\newcommand{\blue}[1]{\textcolor{gblue}{#1}}
-	\newcommand{\red}[1]{\textcolor{gred}{#1}}
+	\newcommand{\blue}[1]{\textcolor{qunqing}{#1}}
+	\newcommand{\red}[1]{\textcolor{yanzhi}{#1}}
 	\newcommand{\yellow}[1]{\textcolor{gyellow}{#1}}
-	\newcommand{\zhu}[1]{\textcolor{zhu}{#1}}
+	\newcommand{\yanzhi}[1]{\textcolor{yanzhi}{#1}}
 	% For math in title
 	\newcommand{\tmath}[1]{\texorpdfstring{\(#1\)}{math}}
 	\newcommand{\tcite}[1]{\texorpdfstring{\citetitle{#1} by \cite{#1}}{cite-content}}
-	\newcommand{\key}[1]{\zhu{\textbf{#1}}\index{#1}}
+	\newcommand{\key}[1]{\yanzhi{\textbf{#1}}\index{#1}}
 	
 	\DeclareMathOperator{\interior}{int}
 	\DeclareMathOperator{\convexhull}{co}
@@ -98,7 +94,6 @@
 	\renewcommand{\cap}{\bigcap}
 	\renewcommand{\cup}{\bigcup}
 	\renewcommand{\emptyset}{\varnothing}
-	% \renewcommand{\hat}{\widehat}
 
 %--------The End--------%
 \endinput
