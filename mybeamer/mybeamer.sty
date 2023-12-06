@@ -1,36 +1,26 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{C:/Users/wl342/Documents/LocalUtility/mybeamer}[20180405]
+\ProvidesPackage{mybeamer}[20230514]
 %--------Enumerate and Math
 %--------Graphs and Color
 %--------Bibliography
-%--------Tables
-%--------Hyper ref
-%--------New Command
-%--------Multiple Files
-%==================================%
-% \mode<presentation> {\usetheme{default}\usecolortheme{beaver}}
-\mode<presentation> {\usetheme{default}}
-\setbeamertemplate{section in toc}[sections numbered] 
-\setbeamertemplate{subsection in toc}[subsections numbered]
-\setbeamertemplate{footline}[frame number]
-%--------Font--------%
+%-------Tables
+%-------Hyper ref
+%-------New Command
+%===============================%
+\usetheme[block = fill]{metropolis}
+\setbeamercolor{background canvas}{bg=white}
+%--------Math--------%
 \RequirePackage{amsmath,amsbsy,amsthm,amssymb}
 \RequirePackage{physics}
-	\theoremstyle{definition}
-		\newtheorem{defn}{Definition}
-		\newtheorem{asmp}{Assumption}
-		\newtheorem{eg}{Example}[section]
-		\newtheorem{literature}{Literature}
-		\newtheorem{model}{Model}[section]
-		\newtheorem*{ans}{Answer}
-	\theoremstyle{plain}
-		\newtheorem{thm}[defn]{Theorem}
-		\newtheorem{prop}[defn]{Proposition}
-		\newtheorem{conj}{Conjecture}
-		\newtheorem{question}{Question}
-	\theoremstyle{remark}
-		\newtheorem*{remark}{Remark}
-		\newtheorem{result}{Result}
+\RequirePackage{subcaption}
+
+\RequirePackage{libertine}
+\RequirePackage[helvet]{sfmath}
+
+\RequirePackage{longtable, booktabs}
+\RequirePackage{physics}
+\RequirePackage[backend=biber,style=authoryear,natbib]{biblatex}
+\RequirePackage{hyperref}
 %--------Graphs and Color--------%
 \RequirePackage{graphicx,subcaption,caption,color}
 	\definecolor{camblue}{rgb}{0.642, 0.757, 0.678}
@@ -40,28 +30,43 @@
 	\definecolor{ggreen}{rgb}{0.235294, 0.729412, 0.329412}
 	\definecolor{violet}{rgb}{0.364706, 0.341176, 0.568627}
 	\definecolor{zhu}{rgb}{0.94902, 0.396078, 0.133333}
+	\definecolor{yanzhi}{RGB}{192, 63, 60}
+	\definecolor{qunqing}{RGB}{76, 141, 174}
 	\definecolor{seagreen}{rgb}{0, 0.412, 0.58}
 %--------Bibliography--------%
-\RequirePackage[backend=biber,style=authoryear,natbib]{biblatex}
-%--------Tables--------%
-\RequirePackage{multirow}
+% \RequirePackage[backend=biber, style=authoryear, citestyle=authoryearbrack, natbib, refsegment=chapter, backref=true]{biblatex}
+\RequirePackage[backend=biber, style=authoryear]{biblatex}
+\AtEveryBibitem{
+    \clearfield{urlyear}
+    \clearfield{urlmonth}
+}
+\RequirePackage{url}
+\urlstyle{same}
+%--------Hyper ref--------% 
+% \RequirePackage[pdfencoding = auto]{hyperref}
+\RequirePackage{bookmark}
+	% \hypersetup{colorlinks = true, citecolor = violet, linkcolor=black, urlcolor= violet}
+	\hypersetup{colorlinks = false}
 %--------New Command--------%
 	% Math
 	\newcommand{\goto}[1]{\stackrel{#1}{\to}} 
-	\newcommand{\iid}{\stackrel{i.i.d.}{\sim}} 
-	\newcommand{\todistri}{\goto{d}}
-	\newcommand{\toprob}{\goto{p}}
-	\newcommand{\indicator}[1]{\mathbf{1}\{#1\}}
-	% Color
-	\newcommand{\blue}[1]{\textcolor{gblue}{#1}}
-	\newcommand{\red}[1]{\textcolor{gred}{#1}}
-	\newcommand{\zhu}[1]{\textcolor{zhu}{#1}}
-	
-	\newcommand{\linterval}[2]{\interval[open left]{#1}{#2}}
-	\newcommand{\rinterval}[2]{\interval[open right]{#1}{#2}}
-	\newcommand{\mynote}[1]{\textit{\# #1}}
-	\newcommand{\fcite}[1]{\cite{#1}: \citetitle{#1}}
+	\newcommand{\indicator}[1]{\mathbb{I}\left\{#1\right\}}
 
+	\newcommand{\Prob}{\mathbb{P}}
+	\newcommand{\Ep}{\mathbb{E}}
+	\DeclareMathOperator{\Var}{Var}
+	\DeclareMathOperator{\Cov}{Cov}
+
+	% Color
+	\newcommand{\blue}[1]{\textcolor{seagreen}{#1}}
+	\newcommand{\red}[1]{\textcolor{yanzhi}{#1}}
+	\newcommand{\yellow}[1]{\textcolor{gyellow}{#1}}
+	\newcommand{\yanzhi}[1]{\textcolor{yanzhi}{#1}}
+	% For math in title
+	\newcommand{\tmath}[1]{\texorpdfstring{\(#1\)}{math}}
+	\newcommand{\tcite}[1]{\texorpdfstring{\citetitle{#1} by \textcite{#1}}{cite-content}}
+	\newcommand{\key}[1]{\yanzhi{\textbf{#1}}\index{#1}}
+	
 	\DeclareMathOperator{\interior}{int}
 	\DeclareMathOperator{\convexhull}{co}
 	\DeclareMathOperator{\diam}{diam}
@@ -70,13 +75,16 @@
 	\DeclareMathOperator{\vecoperator}{vec}
 	\DeclareMathOperator{\vspan}{span}
 	\DeclareMathOperator{\adjugate}{adj}
-	\DeclareMathOperator{\variance}{var}
-	\DeclareMathOperator{\covariance}{cov}
-%--------TOC--------%
-\AtBeginSection[]
-{ \begin{frame}<beamer>\frametitle{Outline}\tableofcontents[currentsection]
-  \end{frame}}
+	\DeclareMathOperator{\vech}{vech}
+	\DeclareMathOperator{\vectorise}{vec}
+	\DeclareMathOperator{\sign}{sign}
+	\DeclareMathOperator{\iid}{i.i.d}
 
-\RequirePackage[semibold]{libertine}\RequirePackage[libertine,libaltvw,varbb, liby]{newtxmath}
+	% \newcommand{\smallcap}{\cap}
+	\renewcommand{\epsilon}{\varepsilon}
+	% \renewcommand{\cap}{\bigcap}
+	% \renewcommand{\cup}{\bigcup}
+	\renewcommand{\emptyset}{\varnothing}
+
 %--------The End--------%
 \endinput

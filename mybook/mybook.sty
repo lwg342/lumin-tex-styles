@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{mybook}[20230221]
+\ProvidesPackage{mybook}[20231127]
 %--------Enumerate and Math
 %--------Graphs and Color
 %--------Bibliography
@@ -11,7 +11,6 @@
 \RequirePackage[inline, shortlabels]{enumitem}
 %--------Math--------%
 \RequirePackage{amsmath,amsbsy,amsthm,amssymb}
-\RequirePackage{physics}
 \newtheoremstyle{red}%
 		{3pt}% Space above
 		{}% Space below 
@@ -23,20 +22,24 @@
 		% {\thmnumber{#2 }\thmname{\@ifempty{#3}{#1}\@ifnotempty{#3}{#3}}}
 		{\llap{\thmnumber{#2}\hspace{1em}}\thmname{\@ifempty{#3}{#1}\@ifnotempty{#3}{#3}}}
 	\newtheoremstyle{blue}%
-		{\topsep}{}{\itshape}{}{\bfseries\color{eblue}}{.}{0.5em}{\llap{\thmnumber{#2}\hspace{1em}}\thmname{\@ifempty{#3}{#1}\@ifnotempty{#3}{#3}}}
+		{\topsep}{}{\itshape}{}{\bfseries\color{qunqing}}{.}{0.5em}{\llap{\thmnumber{#2}\hspace{1em}}\thmname{\@ifempty{#3}{#1}\@ifnotempty{#3}{#3}}}
 	\newtheoremstyle{black}%
 		{\topsep}{}{\itshape}{}{\bfseries}{.}{0.5em}{\llap{\thmnumber{#2}\hspace{1em}}\thmname{#1}\thmnote{ (#3)}}
 	\newtheoremstyle{compact}
 		{0em}{}{}{}{\itshape}{}{0em}{\llap{\thmnumber{#2}\hspace{1em}\thmname{\@ifempty{#3}{#1}\@ifnotempty{#3}{#3}}\hspace{1em}}}
-	
 	% ====================================
 	\RequirePackage{thmtools}
-		\declaretheorem[style=blue, name= Theorem, parent = section]{thm}
-		\declaretheorem[style=black, name= Proposition, sibling = thm]{proposition}
-		\declaretheorem[style=black, name= Lemma, sibling = thm]{lemma}
-		\declaretheorem[style = black, name = Assumption, parent = section]{asmp}
-		\declaretheorem[style=red, name= Definition, parent = section]{defn}
+		\declaretheorem[style=plain, name= Theorem, parent = chapter]{thm}
+		\declaretheorem[style=plain, name= Proposition, sibling = thm]{proposition}
+		\declaretheorem[style=plain, name= Lemma, sibling = thm]{lemma}
+		\declaretheorem[style=plain, name= Corollary, sibling = thm]{corollary}
+		\declaretheorem[style = definition, name = Assumption,  sibling = thm]{asmp}
+		\declaretheorem[style=definition, name= Definition,  sibling = thm]{defn}
+		\declaretheorem[style=definition, name= Example,  sibling = thm]{example}
 		\declaretheorem[style=compact, name= $\lozenge$, numbered = no]{note}
+		\declaretheorem[style=compact, name= Remark, numbered = no]{remark}
+
+		\renewcommand{\qedsymbol}{$\blacksquare$}
 %--------Graphs and Color--------%
 \RequirePackage{graphicx,subcaption,caption,color}
 	\definecolor{camblue}{rgb}{0.642, 0.757, 0.678}
@@ -50,30 +53,46 @@
 	\definecolor{qunqing}{RGB}{76, 141, 174}
 	\definecolor{seagreen}{rgb}{0, 0.412, 0.58}
 %--------Bibliography--------%
-\RequirePackage[backend=biber,style=authoryear,natbib, backref=true]{biblatex}
+% \RequirePackage[backend=biber, style=authoryear, citestyle=authoryearbrack, natbib, refsegment=chapter, backref=true]{biblatex}
+\RequirePackage[backend=biber, style=authoryear, refsegment=chapter, backref=true]{biblatex}
+\AtEveryBibitem{
+    \clearfield{urlyear}
+    \clearfield{urlmonth}
+}
+\usepackage{url}
+\urlstyle{same}
 %--------Hyper ref--------% 
 \RequirePackage[pdfencoding = auto, pdfusetitle]{hyperref}
 \RequirePackage{bookmark}
 	\hypersetup{colorlinks = true, citecolor = violet, linkcolor=black, urlcolor= violet}
-% \newcommand{\propautorefname}{Proposition}
-% \newcommand{\thmautorefname}{Theorem}
-% \newcommand{\lemmaautorefname}{Lemma}
-% \newcommand{\proofautorefname}{Proof}
-% \newcommand{\modelautorefname}{Model}
-% \newcommand{\mylitautorefname}{Literature}
-% \newcommand{\conjautorefname}{Conjecture}
+
+%--------Header and Footer--------%
+\RequirePackage[markcase=noupper]{scrlayer-scrpage}
+\addtokomafont{pagehead}{\upshape}
+\clearpairofpagestyles 
+\cohead{\textsc{\rightmark}}
+\cehead{\textsc{\leftmark}}
+\cfoot*{\pagemark}
+%--------Tables--------%
+\RequirePackage{longtable, booktabs}
 %--------Space--------%
 \RequirePackage{setspace}\onehalfspace
+% \setstretch{1.25}
 \RequirePackage{interval}\intervalconfig{soft open fences}
-\RequirePackage[a4paper]{geometry}
-\RequirePackage{eucal}
-\RequirePackage[semibold]{libertinus}
-\RequirePackage[libertine,libaltvw,varbb,liby,smallerops]{newtxmath}
+\RequirePackage[hmargin =1.25in, head=18pt, a4paper]{geometry}
+\RequirePackage[semibold]{libertine}
+% \RequirePackage{lmodern}
+\RequirePackage[libertine,libaltvw,varbb, liby,smallerops, upint]{newtxmath}
 %--------New Command--------%
 	% Math
 	\newcommand{\goto}[1]{\stackrel{#1}{\to}} 
-	\newcommand{\indicator}[1]{\mathbf{1}\{#1\}}
-	\newcommand{\pr}{\mathbb{P}}
+	\newcommand{\indicator}[1]{\mathbb{I}\left\{#1\right\}}
+
+	\DeclareMathOperator{\Prob}{P}
+	\DeclareMathOperator{\Ep}{E}
+	\DeclareMathOperator{\Var}{Var}
+	\DeclareMathOperator{\Cov}{Cov}
+
 	% Color
 	\newcommand{\blue}[1]{\textcolor{seagreen}{#1}}
 	\newcommand{\red}[1]{\textcolor{yanzhi}{#1}}
@@ -81,7 +100,7 @@
 	\newcommand{\yanzhi}[1]{\textcolor{yanzhi}{#1}}
 	% For math in title
 	\newcommand{\tmath}[1]{\texorpdfstring{\(#1\)}{math}}
-	\newcommand{\tcite}[1]{\texorpdfstring{\citetitle{#1} by \cite{#1}}{cite-content}}
+	\newcommand{\tcite}[1]{\texorpdfstring{\citetitle{#1} by \textcite{#1}}{cite-content}}
 	\newcommand{\key}[1]{\yanzhi{\textbf{#1}}\index{#1}}
 	
 	\DeclareMathOperator{\interior}{int}
@@ -92,17 +111,31 @@
 	\DeclareMathOperator{\vecoperator}{vec}
 	\DeclareMathOperator{\vspan}{span}
 	\DeclareMathOperator{\adjugate}{adj}
-	\DeclareMathOperator{\Var}{Var}
-	\DeclareMathOperator{\Cov}{Cov}
 	\DeclareMathOperator{\vech}{vech}
 	\DeclareMathOperator{\vectorise}{vec}
 	\DeclareMathOperator{\sign}{sign}
 	\DeclareMathOperator{\iid}{i.i.d}
 
+	% \newcommand{\smallcap}{\cap}
 	\renewcommand{\epsilon}{\varepsilon}
-	\renewcommand{\cap}{\bigcap}
-	\renewcommand{\cup}{\bigcup}
+	% \renewcommand{\cap}{\bigcap}
+	% \renewcommand{\cup}{\bigcup}
 	\renewcommand{\emptyset}{\varnothing}
+
+	
+	\newcommand{\pqty}[1]{\left(#1\right)}
+	\newcommand{\bqty}[1]{\left[#1\right]}
+	\newcommand{\cqty}[1]{\left\{#1\right\}}
+	\newcommand{\bmqty}[1]{\begin{bmatrix}#1\end{bmatrix}}
+	\newcommand{\pmqty}[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+	\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+	\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+	\newcommand{\qq}[1]{\qquad\text{#1}\qquad}
+	\DeclareMathOperator{\dd}{d}
+	\newcommand{\dv}[2]{\frac{\dd}{\dd #2}#1}
+	
+	\delimitershortfall=-0.5pt
 
 %--------The End--------%
 \endinput
