@@ -19,5 +19,13 @@
 	\declaretheorem[style=compact, name= Remark, numbered = no]{remark}
 \newenvironment{answer}{\renewcommand{\proofname}{Answer}\begin{proof}}{\end{proof}}
 
+%--------Bibliography--------%
+\RequirePackage[backend=biber, style=authoryear, backref=true]{biblatex}
+	\AtEveryBibitem{
+		\clearfield{urlyear}
+		\clearfield{urlmonth}
+	}
+\usepackage{url}
+	\urlstyle{same}
 %--------The End--------%
 \endinput

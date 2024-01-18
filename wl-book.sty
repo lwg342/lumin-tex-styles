@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{wl-book}[20231127]
+\ProvidesPackage{wl-book}[2024-01-18]
 % by Weiguang Liu
 %===============================%
 
@@ -19,6 +19,7 @@
 	\declaretheorem[style=compact, name= Remark, numbered = no]{remark}
 \newenvironment{answer}{\renewcommand{\proofname}{Answer}\begin{proof}}{\end{proof}}
 
+
 %--------Header and Footer--------%
 \RequirePackage[markcase=noupper]{scrlayer-scrpage}
 	\addtokomafont{pagehead}{\upshape}
@@ -27,5 +28,13 @@
 	\cehead{\textsc{\leftmark}}
 	\cfoot*{\pagemark}
 
+%--------Bibliography--------%
+\RequirePackage[backend=biber, style=authoryear, refsegment=chapter, backref=true]{biblatex}
+	\AtEveryBibitem{
+		\clearfield{urlyear}
+		\clearfield{urlmonth}
+	}
+\usepackage{url}
+	\urlstyle{same}
 %--------The End--------%
 \endinput
