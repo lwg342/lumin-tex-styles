@@ -1,0 +1,31 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{wl-book}[20231127]
+% by Weiguang Liu
+%===============================%
+
+%--------Common--------%
+\input{common.sty}
+
+%--------Theorem styles--------%
+\RequirePackage{thmtools}
+	\declaretheorem[style=plain, name= Theorem, parent = chapter]{thm}
+	\declaretheorem[style=plain, name= Proposition, sibling = thm]{proposition}
+	\declaretheorem[style=plain, name= Lemma, sibling = thm]{lemma}
+	\declaretheorem[style=plain, name= Corollary, sibling = thm]{corollary}
+	\declaretheorem[style = definition, name = Assumption,  sibling = thm]{asmp}
+	\declaretheorem[style=definition, name= Definition, parent = chapter]{defn}
+	\declaretheorem[style=definition, name= Example, parent = chapter]{example}
+	\declaretheorem[style=compact, name= $\lozenge$, numbered = no]{note}
+	\declaretheorem[style=compact, name= Remark, numbered = no]{remark}
+\newenvironment{answer}{\renewcommand{\proofname}{Answer}\begin{proof}}{\end{proof}}
+
+%--------Header and Footer--------%
+\RequirePackage[markcase=noupper]{scrlayer-scrpage}
+	\addtokomafont{pagehead}{\upshape}
+	\clearpairofpagestyles 
+	\cohead{\textsc{\rightmark}}
+	\cehead{\textsc{\leftmark}}
+	\cfoot*{\pagemark}
+
+%--------The End--------%
+\endinput

@@ -1,0 +1,23 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{wl-art}[2024-01-18]
+% By: Weiguang Liu
+% ====================================
+
+%--- Common
+\input{common.sty}
+
+%--- Theorem styles
+\RequirePackage{thmtools}
+	\declaretheorem[style=plain, name= Theorem, parent = section]{thm}
+	\declaretheorem[style=plain, name= Proposition, sibling = thm]{proposition}
+	\declaretheorem[style=plain, name= Lemma, sibling = thm]{lemma}
+	\declaretheorem[style=plain, name= Corollary, sibling = thm]{corollary}
+	\declaretheorem[style = definition, name = Assumption,  sibling = thm]{asmp}
+	\declaretheorem[style=definition, name= Definition, parent = section]{defn}
+	\declaretheorem[style=definition, name= Example, parent = section]{example}
+	\declaretheorem[style=compact, name= $\lozenge$, numbered = no]{note}
+	\declaretheorem[style=compact, name= Remark, numbered = no]{remark}
+\newenvironment{answer}{\renewcommand{\proofname}{Answer}\begin{proof}}{\end{proof}}
+
+%--------The End--------%
+\endinput

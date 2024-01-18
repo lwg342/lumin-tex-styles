@@ -1,0 +1,102 @@
+% Created by Weiguang Liu
+% Edited on 2024-01-18
+%--------Enumerate--------%
+\RequirePackage[inline, shortlabels]{enumitem}
+%--------Math--------%
+\RequirePackage{amsmath,amsbsy,amsthm,amssymb}
+	\newtheoremstyle{compact}
+		{0em}{}{}{}{\itshape}{}{0em}{\llap{\thmnumber{#2}\hspace{1em}\thmname{\@ifempty{#3}{#1}\@ifnotempty{#3}{#3}}\hspace{1em}}}
+%--------Graphs and Color--------%
+\RequirePackage{graphicx,subcaption,caption,color}
+	\definecolor{camblue}{rgb}{0.642, 0.757, 0.678}
+	\definecolor{gblue}{rgb}{0.282353, 0.521569, 0.929412}
+	\definecolor{gred}{rgb}{0.858824, 0.196078, 0.211765}
+	\definecolor{yanzhi}{RGB}{192, 63, 60}
+	\definecolor{qunqing}{RGB}{76, 141, 174}
+	\definecolor{violet}{rgb}{0.364706, 0.341176, 0.568627}
+%--------Bibliography--------%
+\RequirePackage[backend=biber,style=authoryear,natbib,backref=true, uniquename=false]{biblatex}
+\AtEveryBibitem{
+    \clearfield{urlyear}
+    \clearfield{urlmonth}
+}
+\usepackage{url}
+\urlstyle{same}
+%--------Hyper ref--------% 
+\RequirePackage[pdfencoding = auto, pdfusetitle]{hyperref}
+\RequirePackage{bookmark}
+	\hypersetup{colorlinks = true, citecolor = violet, linkcolor=black, urlcolor= violet}
+%--------Geometry--------%
+\RequirePackage[hmargin =1.25in, head=18pt, a4paper]{geometry}
+\RequirePackage{setspace}\onehalfspace
+\RequirePackage{interval}\intervalconfig{soft open fences}
+%--------Tables--------%
+\RequirePackage{longtable, tabularx, booktabs, siunitx, multirow}
+%--------Font--------%
+\RequirePackage[semibold]{libertine}
+\RequirePackage[libertine,libaltvw,varbb,liby,smallerops,upint]{newtxmath}
+\RequirePackage[cal=pxtx, calscaled=0.96, bb=libus]{mathalpha}
+%--------New Command--------%
+	\renewcommand{\qedsymbol}{$\blacksquare$}
+
+	% Color
+	\newcommand{\blue}[1]{\textcolor{seagreen}{#1}}
+	\newcommand{\red}[1]{\textcolor{yanzhi}{#1}}
+	\newcommand{\yellow}[1]{\textcolor{gyellow}{#1}}
+	\newcommand{\yanzhi}[1]{\textcolor{yanzhi}{#1}}
+	% For math in title
+	\newcommand{\tmath}[1]{\texorpdfstring{\(#1\)}{math}}
+	\newcommand{\tcite}[1]{\texorpdfstring{\citetitle{#1} by \textcite{#1}}{cite-content}}
+	\newcommand{\key}[1]{\yanzhi{\textbf{#1}}\index{#1}}
+	
+	\newcommand{\goto}[1]{\stackrel{#1}{\to}} 
+	\newcommand{\indicator}[1]{\mathbb{I}\left\{#1\right\}}
+
+	\DeclareMathOperator{\Prob}{P}
+	\DeclareMathOperator{\Ep}{\mathbb{E}}
+	% \newcommand{\Ep}{\mathbb{E}}
+	\DeclareMathOperator{\Var}{Var}
+	\DeclareMathOperator{\Cov}{Cov}
+	\DeclareMathOperator{\dd}{d}
+
+	\DeclareMathOperator{\interior}{int}
+	\DeclareMathOperator{\convexhull}{co}
+	\DeclareMathOperator{\diam}{diam}
+	\DeclareMathOperator{\diag}{diag}
+	\DeclareMathOperator{\inv}{inv}
+	\DeclareMathOperator{\vecoperator}{vec}
+	\DeclareMathOperator{\vspan}{span}
+	\DeclareMathOperator{\adjugate}{adj}
+	\DeclareMathOperator{\vech}{vech}
+	\DeclareMathOperator{\vectorise}{vec}
+	\DeclareMathOperator{\sign}{sign}
+
+	\renewcommand{\epsilon}{\varepsilon}
+	\renewcommand{\emptyset}{\varnothing}
+
+	\newcommand{\pqty}[1]{\left(#1\right)}
+	\newcommand{\bqty}[1]{\left[#1\right]}
+	\newcommand{\cqty}[1]{\left\{#1\right\}}
+	\newcommand{\bmqty}[1]{\begin{bmatrix}#1\end{bmatrix}}
+	\newcommand{\pmqty}[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+	\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+	\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+	\newcommand{\qq}[1]{\quad\text{#1}\quad}
+	
+	\delimitershortfall=-0.5pt
+	
+	\newcommand{\dv}[2][]{%
+		\ifthenelse{\equal{#1}{}}{%
+			\frac{d}{d #2}%
+		}{%
+			\frac{d^{#1}}{d{#2}^{#1}}%
+		}%
+	}
+	\newcommand{\pdv}[2][]{%
+		\ifthenelse{\equal{#1}{}}{%
+			\frac{\partial}{\partial #2}%
+		}{%
+			\frac{\partial^{#1}}{\partial #2 \partial {#2}'}%
+		}%
+	}
